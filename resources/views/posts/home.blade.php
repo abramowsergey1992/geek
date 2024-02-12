@@ -1,6 +1,8 @@
 @extends('layouts.layout')
 
- 
+ @section('head')
+<title>Лента постов | ActQA</title>
+@endsection 
 
 @section('content')
 <h1>Лента постов</h1>
@@ -11,7 +13,7 @@
             </div>
         @endif
 		<div class="posts-head">
-            <a class="btn" href="{{ route('posts.create') }}">{{ __('Добавить пост') }}</a>
+            <a class="btn" href="{{ route('posts.create') }}">{{ __('+ Добавить пост') }}</a>
             <div class="posts-filters">
                     <button class="home-sort" sort="desc">
                         <div class="home-sort__icon">

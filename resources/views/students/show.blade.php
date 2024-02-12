@@ -1,7 +1,9 @@
 @extends('layouts.layout')
 
  
-
+  @section('head')
+<title>{{$user->first_name}} {{$user->last_name}} | ActQA</title>
+@endsection 
 @section('content')
 <h1>{{$user->first_name}} {{$user->last_name}}</h1>
 <div class="user">
@@ -12,6 +14,8 @@
 		<div class="user__right">
 	
 		@can('user-crud', '1',$user->user_id)
+		            <a class="btn" style="margin-bottom:40px;display: inline-block;" href="{{ route('posts.create') }}">{{ __('+ Добавить пост') }}</a>
+
 <div class="actions-btns-row">
 											<!--  -->
 											<a  class="btn-student-edit btn-edit" href="{{ route('students.edit', $user->id) }}">

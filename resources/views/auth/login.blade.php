@@ -3,24 +3,24 @@
  
 
 @section('head')
-<title>Login page | ActQA</title>
+<title>Вход | ActQA</title>
 @endsection 
 @section('content')
 <div class="login-form">
-    <h1>Login</h1>
+    <h1>Вход</h1>
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
         <label class="form-item">
-            <span class="form-item__title">Login</span>
+            <span class="form-item__title">Логин</span>
             <input  required name="login" placeholder=""  value="{{ old('login') }}" type="text" >
             @error('login')
                 <span class="form-item__error">{{ $message }}</span> 
             @enderror
         </label>
         <label class="form-item">
-            <span class="form-item__title">Password</span>
+            <span class="form-item__title">Пароль</span>
             <input required name="password" placeholder=""   autocomplete="current-password"  value="" type="password" >
             @error('password')
                 <span class="form-item__error">{{ $message }}</span> 
@@ -31,7 +31,7 @@
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" class="rounded  border-gray-30 text-indigo-600 shadow-sm focus:ring-indigo-500 " name="remember">
-                <span class="ms-2 text-sm text-gray-600  ">{{ __('Remember me') }}</span>
+                <span class="ms-2 text-sm text-gray-600  ">{{ __('Запомнить меня') }}</span>
             </label>
         </div>
 
@@ -43,7 +43,7 @@
             @endif -->
 
             <x-primary-button class="ms-3">
-                {{ __('Log in') }}
+                {{ __('Войти') }}
             </x-primary-button>
         </div>
     </form></div>

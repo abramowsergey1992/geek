@@ -17,7 +17,7 @@ return new class extends Migration
       ->onUpdate('cascade')
       ->onDelete('cascade');
             $table->char('title');
-            $table->string('photo');
+            $table->string('photo')->default('no-photo.jpg')->nullable();
             $table->text('description');
             $table->text('content'); 
             $table->dateTime('delay');

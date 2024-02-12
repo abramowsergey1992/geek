@@ -1,9 +1,11 @@
 @extends('layouts.layout')
 
- 
+  @section('head')
+<title>Редактировать  студента | ActQA</title>
+@endsection 
 
 @section('content')
-    <h1>Edit Student:</h1>
+    <h1>Редактировать студента</h1>
        <form method="POST" enctype="multipart/form-data"  action="{{ route('students.update',$user->id) }}">
 		@csrf               
         @method('put')
@@ -18,46 +20,46 @@
 		@endif
 		<div class="columns-2">
          <label class="form-item">
-            <span class="form-item__title">Login</span>
+            <span class="form-item__title">Логин</span>
             <input  required name="login" placeholder=""  value="{{ old('login', $user->login) }}"  type="text" >
             @error('login')
                 <span class="form-item__error">{{ $message }}</span> 
             @enderror
         </label>
          <label class="form-item">
-            <span class="form-item__title">First Name</span>
+            <span class="form-item__title">Имя</span>
             <input  required name="first_name" placeholder=""  value="{{  old('first_name', $user->first_name)}}" type="text" >
             @error('first_name')
                 <span class="form-item__error">{{ $message }}</span> 
             @enderror
         </label>
          <label class="form-item">
-            <span class="form-item__title">Last Name</span>
+            <span class="form-item__title">Фамилия</span>
             <input  required name="last_name" placeholder=""  value="{{   old('last_name', $user->last_name)}}" type="text" >
             @error('last_name')
                 <span class="form-item__error">{{ $message }}</span> 
             @enderror
         </label>
          <label class="form-item">
-            <span class="form-item__title">Birth Day</span>
+            <span class="form-item__title">Дата рождения</span>
             <input  required name="birthday" placeholder=""  value="{{old('birthday', \Carbon\Carbon::parse($user->birthday)->format('d.m.Y') ) }}" type="text" >
             @error('birthday')
                 <span class="form-item__error">{{ $message }}</span> 
             @enderror
         </label>
          <label class="form-item">
-            <span class="form-item__title">Phone</span>
-            <input  required name="phone" placeholder="" class="_mask-phone" value="{{ old('birthday', $user->birthday) }}" type="text" >
+            <span class="form-item__title">Номер телефона</span>
+            <input  required name="phone" placeholder="" class="_mask-phone" value="{{ old('phone', $user->phone) }}" type="text" >
             @error('phone')
                 <span class="form-item__error">{{ $message }}</span> 
             @enderror
         </label>
 		
          <label class="form-item">
-            <span class="form-item__title">Role</span>
+            <span class="form-item__title">Роль</span>
             <select name="role">
-                <option @if ('student' == old('role', $user->role)) selected @endif value="student">Student</option>
-                <option @if ('administrator' == old('role', $user->role)) selected @endif value="administrator">Administrator</option>
+                <option @if ('student' == old('role', $user->role)) selected @endif value="student">Студент</option>
+                <option @if ('administrator' == old('role', $user->role)) selected @endif value="administrator">Администратор</option>
             </select>
              @error('role')
                 <span class="form-item__error">{{ $message }}</span> 
@@ -79,7 +81,7 @@
             @enderror
         </label> -->
         <label class="form-item">
-            <span class="form-item__title">Password</span>
+            <span class="form-item__title">Пароль</span>
             <input required name="password" placeholder=""   autocomplete="new-password"  value="{{ old('password', $user->password) }}" type="text" >
             @error('password')
                 <span class="form-item__error">{{ $message }}</span> 
@@ -89,11 +91,11 @@
  
 		</div>
             <div class="form-item">
-                <span class="form-item__title">Avatar</span>
+                <span class="form-item__title">Аватар</span>
                 <div class="input-file-row">
                     <label class="input-file">
                         <input type="file" name="avatar" value=""  accept="image/*">		
-                        <span>Select file</span>
+                        <span>Выберите файл</span>
                     </label>
                     <div class="input-file-list">  
                         <div class="input-file-list-item">
@@ -110,7 +112,7 @@
         <div class="flex items-center   mt-4">
       
             <x-primary-button class="ms-4">
-                {{ __('Update') }}
+                {{ __('Обновить') }}
             </x-primary-button>
         </div>
     </form>

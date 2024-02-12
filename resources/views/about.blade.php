@@ -1,6 +1,8 @@
 @extends('layouts.layout')
 
- 
+   @section('head')
+<title>О нас | ActQA</title>
+@endsection 
 
 @section('content')
 

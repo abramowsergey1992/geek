@@ -17,6 +17,10 @@ use App\Http\Controllers\StudentController;
 */
 
 
+Route::get('/reload', function () {
+     Artisan::call('migrate:refresh --seed');
+    echo "База пересоздана успешно";
+})->name('about');
 Route::get('/about', function () {
     return view('about');
 })->name('about');

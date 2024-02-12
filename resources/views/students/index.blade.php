@@ -1,9 +1,11 @@
 @extends('layouts.layout')
 
  
-
+  @section('head')
+<title>Студенты | ActQA</title>
+@endsection 
 @section('content')
-<h1>Students</h1>
+<h1>Студенты</h1>
     <div class="">
 
 	
@@ -16,7 +18,7 @@
 
                     <div class="mt-1 mb-4">
                         <x-primary-button>
-                            <a href="{{ route('students.create') }}">{{ __('Add Student') }}</a>
+                            <a href="{{ route('students.create') }}">{{ __('+ Добавить студента') }}</a>
                         </x-primary-button>
                     </div>
                     <div class="table-overfolow">
@@ -24,12 +26,15 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Role</th>
-                                    <th>Updatet At</th>
-                                    <th>Createt At</th>
-                                    <th>Action</th>
+                                    <th>Имя</th>
+                                    <th>Телефон</th>
+                                    <th>Роль</th>
+                                    
+                                <th>Обновленно</th>
+                                <th>Дата создания</th>
+                                    <th>
+                                        
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>

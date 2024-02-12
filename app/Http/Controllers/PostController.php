@@ -31,6 +31,24 @@ class PostController extends Controller
          $posts = Post::where('draft', '==', 0)->where('delay', '<=', now())->orderBy('delay',  $sort)->paginate(6);
         return   $posts;
     }
+    /**
+     * Display a listing of the resource.
+     */
+    public function getPost(string $id)
+    {
+
+         $post = DB::table('posts')
+      ->join('users', 'users.id', '=', 'posts.user_id')
+      ->select('posts.*', 'users.first_name','users.last_name','users.avatar')
+      ->where('posts.id', $id)->first();
+    
+    
+   
+//               if (! Gate::allows('post-crud',$post->user_id,$post->user_id)) {
+//                    return   "Нет доступа";   
+//    }
+        return   $post;
+    }
 
 
     public function home()

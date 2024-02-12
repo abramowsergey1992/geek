@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+       
         \App\Models\User::factory()->create([
             'login' => 'admin',
             'avatar' => 'admin.jpg',
@@ -21,7 +22,7 @@ class DatabaseSeeder extends Seeder
             'last_name' => 'Admin',
             'birthday' => fake()->date(),
             'role' => 'administrator',
-            'phone' => fake()->unique()->phonenumber(),
+            'phone' => '+7 9'.rand(0, 9).rand(0, 9).' '.rand(0, 9).rand(0, 9).rand(0, 9).' '.rand(0, 9).rand(0, 9).' '.rand(0, 9).rand(0, 9),
             'email' => 'admin@admin.ru',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

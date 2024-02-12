@@ -5,7 +5,7 @@
 @endsection 
 
 @section('content')
-<h1>Посты</h1>
+<h1>Список постов</h1>
     <div class="">
         @if (session()->has('status'))
 
@@ -15,22 +15,19 @@
         @endif
 
         <div class="mt-1 mb-4">
-
-           
-                <a class="btn" href="{{ route('posts.create') }}">{{ __('Add Post') }}</a>
-
+             <a class="btn" href="{{ route('posts.create') }}">+ Добавить пост</a>
         </div>
         <div class="table-overfolow">
             <table class="table-list">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Title</th>
-                        <th>Is draft</th>
-                        <th>Delay post to</th>
-                        <th>Updatet At</th>
-                        <th>Createt At</th>
-                        <th>Action</th>
+                        <th>Заголовок</th>
+                        <th>Черновик</th>
+                        <th>Дата публикации</th>
+                        <th>Обновленно</th>
+                        <th>Дата создания</th>
+                        <th></th>
             
                     </tr>
                 </thead>
@@ -42,11 +39,11 @@
                             <a  class="post-row__link" href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></td>
                         <td>
                             @if ($post->draft  == 1)
-                            true
+                            Да
                             @endif
                         </td>
                         <td>{{ $post->delay }}</td>
-                        <td>{{ $post->upodate_at }}</td>
+                        <td>{{ $post->updated_at }}</td>
                         <td>{{ $post->created_at }}</td>
                         <td>
                             
@@ -70,7 +67,7 @@
                         
                     </tr>
                     @empty
-                        <td colspan="7"  ><b>No posts</b></>
+                        <td colspan="7"  ><b>Постов нет</b></td>
                     @endforelse
                 </tbody>
             </table>
