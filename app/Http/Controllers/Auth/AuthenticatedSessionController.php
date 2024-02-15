@@ -33,14 +33,8 @@ class AuthenticatedSessionController extends Controller
     }
 
     
-    public function api_store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
 
-        $request->session()->regenerate();
 
-        return resopose();
-    }
 
 
     /**

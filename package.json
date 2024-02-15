@@ -17,8 +17,10 @@
         "vite": "^5.0.0"
     },
     "dependencies": {
+        "@prettier/plugin-php": "^0.22.2",
         "air-datepicker": "^3.4.0",
         "ckeditor4": "^4.23.0",
-        "inputmask": "^5.0.8"
+        "inputmask": "^5.0.8",
+        "prettier": "^3.2.5"
     }
 }
