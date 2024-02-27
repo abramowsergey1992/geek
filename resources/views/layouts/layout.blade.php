@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-            
-        @yield('head')
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
-        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
-/>
 
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
-<!-- 
+    @yield('head')
+
+    <!-- Fonts -->
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+    <!-- 
         <script>
         tinymce.init({
             selector: 'textarea.editor', // Replace this CSS selector to match the placeholder element for TinyMCE
@@ -27,116 +25,119 @@
         });
         </script> -->
 
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <!-- Scripts -->
-        @vite(['resources/css/app.scss', 'resources/js/app.js'])
-    </head>
- 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Scripts -->
+    @vite(['resources/css/app.scss', 'resources/js/app.js'])
+</head>
+
 <body>
 
-        <div class="layout">
-            <header class="header">
-                <div class="inner">
-                    <div class="header__row">
-         
-                      <ul class="main-menu">
-                            <li>
-                                <a href="/"  class="
+    <div class="layout">
+        <header class="header">
+            <div class="inner">
+
+                <div class="header__row">
+                    <a href="/" class="logo">
+                        <svg viewBox="0 0 116 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.65966 5.00003H11.1847C11.4587 5.00003 11.5417 5.15703 11.3757 5.37403L4.99566 13.216L9.40066 21.057C9.53766 21.281 9.40066 21.461 9.12066 21.461H5.20466C5.06093 21.4567 4.92059 21.4164 4.79653 21.3437C4.67247 21.271 4.56866 21.1683 4.49466 21.045L0.101656 13.204C0.0228605 13.0676 -0.0114868 12.9101 0.00338802 12.7533C0.0182629 12.5965 0.081621 12.4482 0.184656 12.329L5.83666 5.38003C6.04985 5.14938 6.34583 5.01272 6.65966 5.00003Z" fill="#F1361D" />
+                            <path d="M110.97 5.41603L115.364 13.258C115.438 13.3926 115.47 13.5466 115.455 13.6996C115.44 13.8525 115.379 13.9974 115.28 14.115L109.622 21.063C109.41 21.293 109.116 21.429 108.806 21.443H104.281C104 21.443 103.917 21.28 104.09 21.088L110.469 13.246L106.057 5.40403C105.926 5.18103 106.063 5.00003 106.337 5.00003H110.26C110.403 5.0071 110.542 5.04862 110.666 5.12104C110.79 5.19347 110.894 5.29466 110.97 5.41603Z" fill="#F1361D" />
+                            <path d="M26.632 0.610025C27.0867 0.610025 27.4897 0.765026 27.841 1.07503C28.213 1.38503 28.43 1.76736 28.492 2.22203L31.53 22H25.702L24.152 7.18203C24.1107 6.78936 24.0797 6.40703 24.059 6.03503C24.059 5.66303 24.059 5.29103 24.059 4.91903H23.191C23.1083 5.22903 23.0153 5.58036 22.912 5.97303C22.8087 6.36569 22.6743 6.74803 22.509 7.12003L16.65 22H10.605L19.223 2.00503C19.3883 1.55036 19.6467 1.20936 19.998 0.982026C20.37 0.734026 20.7937 0.610025 21.269 0.610025H26.632ZM27.934 12.669L27.438 16.978H16.278L16.805 12.669H27.934Z" fill="#F1361D" />
+                            <path d="M42.0402 6.15903C43.1355 6.15903 44.2825 6.25203 45.4812 6.43803C46.6799 6.60336 47.7339 6.88236 48.6432 7.27503L47.8682 10.716C46.8142 10.6954 45.8532 10.685 44.9852 10.685C44.1172 10.685 43.3732 10.685 42.7532 10.685C41.9885 10.685 41.3789 10.7987 40.9242 11.026C40.4695 11.2327 40.1182 11.5944 39.8702 12.111C39.6222 12.607 39.4362 13.32 39.3122 14.25C39.1675 15.2627 39.1469 16.0274 39.2502 16.544C39.3535 17.0607 39.6015 17.412 39.9942 17.598C40.3869 17.784 40.9552 17.877 41.6992 17.877C42.0919 17.877 42.5569 17.877 43.0942 17.877C43.6522 17.8564 44.2412 17.8357 44.8612 17.815C45.5019 17.7737 46.1322 17.722 46.7522 17.66L47.1552 21.256C46.1839 21.6694 45.1299 21.9587 43.9932 22.124C42.8565 22.2894 41.7612 22.372 40.7072 22.372C38.8885 22.372 37.3902 22.093 36.2122 21.535C35.0342 20.977 34.2075 20.0884 33.7322 18.869C33.2775 17.6497 33.1845 16.048 33.4532 14.064C33.7219 12.1834 34.1662 10.6644 34.7862 9.50703C35.4062 8.34969 36.2949 7.50236 37.4522 6.96503C38.6302 6.42769 40.1595 6.15903 42.0402 6.15903Z" fill="#F1361D" />
+                            <path d="M59.072 2.43903L57.026 16.792C56.964 17.2674 57.0054 17.5877 57.15 17.753C57.2947 17.9184 57.6254 18.001 58.142 18.001H60.095L60.374 21.721C59.94 21.8864 59.4234 22.0104 58.824 22.093C58.2247 22.1964 57.6357 22.2687 57.057 22.31C56.4784 22.372 56.003 22.403 55.631 22.403C54.1224 22.403 52.965 22.0104 52.159 21.225C51.353 20.4397 51.0534 19.365 51.26 18.001L53.523 2.43903H59.072ZM62.451 6.59303L61.986 10.096H49.71L50.144 6.74803L53.12 6.59303H62.451Z" fill="#F1361D" />
+                            <path d="M74.101 0.176025C76.3537 0.176025 78.1723 0.517026 79.557 1.19903C80.9417 1.88103 81.882 3.03836 82.378 4.67103C82.874 6.30369 82.9257 8.58736 82.533 11.522C82.2437 13.692 81.8303 15.49 81.293 16.916C80.7557 18.3214 80.0633 19.427 79.216 20.233C78.3893 21.039 77.3663 21.6074 76.147 21.938C74.9277 22.2687 73.4913 22.434 71.838 22.434C69.5027 22.434 67.653 22.093 66.289 21.411C64.925 20.729 64.0157 19.5717 63.561 17.939C63.127 16.2857 63.1063 14.002 63.499 11.088C63.809 8.95936 64.2223 7.19236 64.739 5.78703C65.2763 4.36103 65.9583 3.24503 66.785 2.43903C67.6117 1.61236 68.6243 1.03369 69.823 0.703026C71.0217 0.351692 72.4477 0.176025 74.101 0.176025ZM69.513 22.961C70.9183 23.5397 72.3857 23.9944 73.915 24.325C75.4443 24.6764 77.1287 24.9967 78.968 25.286L76.86 30.091C74.9173 29.533 73.202 28.882 71.714 28.138C70.226 27.4147 68.9343 26.6294 67.839 25.782L69.513 22.961ZM74.008 4.60903C73.0987 4.60903 72.365 4.79503 71.807 5.16703C71.2697 5.53903 70.8357 6.22103 70.505 7.21303C70.195 8.20503 69.8953 9.64136 69.606 11.522C69.3373 13.2787 69.2237 14.622 69.265 15.552C69.327 16.482 69.575 17.1227 70.009 17.474C70.443 17.8254 71.1043 18.001 71.993 18.001C72.923 18.001 73.6567 17.815 74.194 17.443C74.7313 17.071 75.1653 16.389 75.496 15.397C75.8267 14.3844 76.1367 12.948 76.426 11.088C76.6947 9.33136 76.798 7.98803 76.736 7.05803C76.674 6.12803 76.426 5.48736 75.992 5.13603C75.558 4.78469 74.8967 4.60903 74.008 4.60903Z" fill="#F1361D" />
+                            <path d="M97.9562 0.610025C98.4109 0.610025 98.8139 0.765026 99.1652 1.07503C99.5372 1.38503 99.7542 1.76736 99.8162 2.22203L102.854 22H97.0262L95.4762 7.18203C95.4349 6.78936 95.4039 6.40703 95.3832 6.03503C95.3832 5.66303 95.3832 5.29103 95.3832 4.91903H94.5152C94.4326 5.22903 94.3396 5.58036 94.2362 5.97303C94.1329 6.36569 93.9986 6.74803 93.8332 7.12003L87.9742 22H81.9292L90.5472 2.00503C90.7126 1.55036 90.9709 1.20936 91.3222 0.982026C91.6942 0.734026 92.1179 0.610025 92.5932 0.610025H97.9562ZM99.2582 12.669L98.7622 16.978H87.6022L88.1292 12.669H99.2582Z" fill="#F1361D" />
+                        </svg>
+
+                    </a>
+                    <ul class="main-menu">
+                        <li>
+                            <a href="/" class="
                                 @if(Request::path() === '/')
 _active
  @endif ">Главная</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('about') }}"  class="
+                        </li>
+                        <li>
+                            <a href="/aboutt" class="
                                 @if(Request::path() === 'about')
 _active
- @endif " >О нас</a>
-                            </li>
-@can('is-admin')
-                            <li>
-                                <a href="{{ route('posts.index') }}"  class="
+ @endif ">О нас</a>
+                        </li>
+                        @can('is-admin')
+                        <li>
+                            <a href="#" class="
+                        ">Админ</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('posts.index') }}" class="
                                 @if(Request::path() === 'posts')
 _active
  @endif "">Посты</a>
                             </li>
                             <li>
-                                <a href="{{ route('students.index') }}"  class="
+                                <a href=" {{ route('students.index') }}" class="
                                 @if(Request::path() === 'students')
 _active
  @endif ">Пользователи</a>
-                            </li>
-                    @endcan
-                            <li>
-                                 @if (Route::has('login'))
-                        
-                                @auth
-                                    <a href="{{ route('students.show',Auth::user()->id) }}" class="toolbar__link 
-                                    @if(Request::path() === 'students/'.Auth::user()->id)
+                        </li>
+                        @endcan
+                        <li>
+                            @if (Route::has('login'))
+
+                            @auth
+                            <a href="{{ route('profile') }} " class="toolbar__link 
+                                    @if(Request::path() === 'profile')
                                         _active
                                     @endif">Профиль</a>
-                                    <ul>
-                                        <li> 
-                                            <form method="POST" action="{{ route('logout') }}">
-                                                @csrf
-                                                <a href="{{ route('logout') }}"  onclick="event.preventDefault();
+                            <ul>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                                     this.closest('form').submit();">Выйти</a>
 
-                                            </form>
-                                        </li>
-                                    </ul> 
-                                     @endauth
-                                @endif
-                                @if (!Auth::check())
-                                    <a href="{{ route('login') }}" class="toolbar__link">Войти</a>
-                                    <!-- <span class="divider">/</span>
-                                    @if (Route::has('register'))
-                                        <a href="{{ route('register') }}" class="toolbar__link">Register</a>
-                                    @endif -->
-                            
-                            
-                                 @endif
-                            </li>
-                        </ul>
-                     </div>
-                </div>
-                    <!-- <div class="toolbar">
-                        @if (Route::has('login'))
-                        
-                                @auth
-                                    <a href="{{ url('/dashboard') }}" class="toolbar__link">My profile</a>
-                                @else
-                                    <a href="{{ route('login') }}" class="toolbar__link">Log in</a>
-                                    <span class="divider">/</span>
-                                    @if (Route::has('register'))
-                                        <a href="{{ route('register') }}" class="toolbar__link">Register</a>
-                                    @endif
-                                @endauth
-                            
-                        @endif
-                    </div> -->
-                  
-               
-            </header>
-            <main>
-                <div class="inner">
-                    @yield('content')
-                </div>
-            </main>
-            <footer class="footer">
-                <div class="inner">
-                    <div class="footer__copy">
-                    Все права защещены ⓒ {{ now()->year }}, Action Group
+                                    </form>
+                                </li>
+                            </ul>
+                            @endauth
+                            @endif
+                            @if (!Auth::check())
+                            <a href="{{ route('login') }}" class="toolbar__link">Войти</a>
+
+
+                            @endif
+                        </li>
+                    </ul>
+                    <div class="burger-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
                 </div>
-            </footer>
-        </div>        <script>
-    //         if( document.querySelector( 'textarea.editor' )){
-    // ClassicEditor
-    //     .create( document.querySelector( 'textarea.editor' ) )
-    //     .catch( error => {
-    //         console.error( error );
-    //     } );}
-</script>
+            </div>
+
+
+        </header>
+        <main>
+            <div class="inner">
+                @yield('content')
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="inner">
+                <div class="footer__copy">
+                    Все права защещены ⓒ {{ now()->year }}, Action Group
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script>
+        //         if( document.querySelector( 'textarea.editor' )){
+        // ClassicEditor
+        //     .create( document.querySelector( 'textarea.editor' ) )
+        //     .catch( error => {
+        //         console.error( error );
+        //     } );}
+    </script>
 </body>
- 
+
 </html>

@@ -15,15 +15,15 @@ new AirDatepicker(".birthday", {
 });
 $(".post__content").each(function () {
     let count = $(this).html().length;
-    let text = "1 минута";
+    let text = "1 час";
     if (count > 100) {
-        text = "3 минуты";
+        text = "3 часа";
     }
     if (count > 400) {
-        text = "5 минут";
+        text = "5 часов";
     }
     if (count > 700) {
-        text = "больше 5 минут";
+        text = "больше 5 часов";
     }
     $(this)
         .find(".post__content-time")
@@ -75,6 +75,11 @@ $(document).on("click", ".input-file-list-remove", function () {
         }
     }
     input[0].files = dt.files;
+    if (input[0].files.length == 0) {
+        $('[name="delete_photo"]').val("1");
+    } else {
+        $('[name="delete_photo"]').val("0");
+    }
 });
 
 $(".input-file input[type=file]").on("change", function () {
@@ -84,7 +89,7 @@ $(".input-file input[type=file]").on("change", function () {
     for (var i = 0; i < this.files.length; i++) {
         let file = this.files.item(i);
         dt.items.add(file);
-
+        $('[name="delete_photo"]').val("0");
         let reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = function () {
@@ -140,8 +145,8 @@ function renderHome(newurl = location.href) {
 					    <p>${
                             element.description
                         }</p>  <div class="post-preview__date" >${formatDate(
-                d
-            )}</div>
+                            d,
+                        )}</div>
                     </div>
     `);
         });
@@ -155,15 +160,19 @@ if ($(".post-grid._ajax").length) {
         function (e) {
             e.preventDefault();
             renderHome($(this).attr("href"));
-        }
+        },
     );
 }
+$(".burger-btn ").click(function () {
+    $(this).toggleClass("_open");
+});
+
 $(".home-sort").click(function () {
     var url_string = location.href;
     var url = new URL(url_string);
     $(".home-sort").attr(
         "sort",
-        $(".home-sort").attr("sort") == "asc" ? "desc" : "asc"
+        $(".home-sort").attr("sort") == "asc" ? "asc" : "asc",
     );
     url.searchParams.set("sort", $(".home-sort").attr("sort"));
     history.pushState({}, null, url.href);

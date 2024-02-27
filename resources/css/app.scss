@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+body:has(.burger-btn._open) {
+    @media(max-width:700px) {
+        overflow: hidden;
+    }
+}
+
 .login-form {
     max-width: 400px;
     margin-left: auto;
@@ -23,7 +29,7 @@ h1 {
         padding-right: 16px;
     }
 
-    @media(max-width:600px) {
+    @media(max-width:700px) {
         padding-left: 10px;
         padding-right: 10px;
     }
@@ -138,11 +144,76 @@ body {
 
 .input-file-row {
     display: inline-block;
+
+    &:has(input[disabled]) {
+        pointer-events: none;
+    }
+}
+
+.burger-btn {
+    display: block;
+    margin-left: auto;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+    display: none;
+
+    @media(max-width:700px) {
+        display: block;
+    }
+
+    // &:hover {
+    //     span {
+    //         background: var(--contrast);
+    //     }
+    // }
+    &._open {
+        span {
+            &:nth-child(1) {
+                transform: rotate(-45deg);
+            }
+
+            &:nth-child(2) {
+                opacity: 0;
+            }
+
+            &:nth-child(3) {
+                transform: rotate(45deg);
+            }
+        }
+    }
+
+    span {
+        height: 2px;
+        width: 100%;
+        position: absolute;
+        left: 0%;
+        background: #111;
+        border-radius: 1px;
+        transform: translateY(-50%);
+        top: 50%;
+        transition: opacity 0.3s, transform 0.3s;
+
+        &:nth-child(1) {
+            transform: translateY(-10px);
+        }
+
+        &:nth-child(2) {
+
+            transform: translateY(-50%);
+        }
+
+        &:nth-child(3) {
+            transform: translateY(8px);
+        }
+    }
 }
 
 .input-file {
     position: relative;
     display: inline-block;
+
 
 
 
@@ -316,6 +387,25 @@ main {
     flex-direction: row;
     gap: 20px;
 
+    @media(max-width:700px) {
+        margin-left: -700px;
+        background: #fff;
+        left: 0;
+        top: 0;
+        min-width: 250px;
+        height: 100dvh;
+        z-index: 33;
+        flex-direction: column;
+        position: absolute;
+        padding: 30px;
+        box-shadow: 0 0 50px #000;
+        transition: margin 0.7s;
+
+        body:has(.burger-btn._open) & {
+            margin-left: 0;
+        }
+    }
+
     li {
         position: relative;
 
@@ -326,20 +416,28 @@ main {
         }
 
         ul {
+            margin-top: 20px;
+        }
+
+        @media(min-width:700px) {
 
 
-            margin-left: -15px;
-            position: absolute;
-            background: var(--border);
-            border: 2px solid var(--border);
-            display: none;
-            min-width: calc(100% + 30px);
+            ul {
+                margin-top: 0;
 
-            li {
-                padding: 5px 15px;
+                margin-left: -15px;
+                position: absolute;
+                background: var(--border);
+                border: 2px solid var(--border);
+                display: none;
+                min-width: calc(100% + 30px);
 
-                a {
-                    font-size: 14px;
+                li {
+                    padding: 5px 15px;
+
+                    a {
+                        font-size: 14px;
+                    }
                 }
             }
         }
@@ -452,6 +550,12 @@ main {
     gap: 10px;
 }
 
+.logo {
+    margin-right: auto;
+    min-width: 100px;
+    margin-bottom: -5px;
+}
+
 .columns-2 {
     columns: 2;
     column-gap: 0 30px;
@@ -464,6 +568,11 @@ main {
 h1 {
     margin-top: 50px;
     margin-bottom: 20px;
+
+    @media(max-width:700px) {
+        font-size: 30px;
+        line-height: 140%;
+    }
 }
 
 .post__content-time {
@@ -516,6 +625,12 @@ h1 {
     border-radius: 4px;
     font-size: 16px;
     min-width: 150px;
+
+    &[disabled] {
+        pointer-events: none;
+        border: 0 solid;
+        background-color: #eee;
+    }
 
     &:hover {
         color: var(--contrast);
@@ -681,7 +796,7 @@ h1 {
     flex-direction: row;
     align-items: center;
 
-    @media(max-width:600px) {
+    @media(max-width:700px) {
         flex-direction: column;
     }
 
@@ -696,7 +811,7 @@ h1 {
         display: flex;
         gap: 10px;
 
-        @media(max-width:600px) {
+        @media(max-width:700px) {
             margin-top: 20px;
         }
     }

@@ -51,7 +51,7 @@ class StudentController extends Controller
                         'last_name' => ['string', 'max:255'],
                         'birthday' => ['string', 'max:255'],
                         'phone' => ['string', 'max:255', Rule::unique('users')->ignore($request->id)],
-                        'email' => ['string', 'lowercase', 'email', 'max:255', Rule::unique('users')->ignore($request->id)],
+                        'email' => ['string', 'lowercase', 'max:255', Rule::unique('users')->ignore($request->id)],
                         'password' => [Rules\Password::defaults()],
                     ]
                 );
@@ -83,9 +83,9 @@ class StudentController extends Controller
                 if ($request->last_name) {
                     $user->last_name = $request->last_name;
                 }
-                if ($request->phone) {
-                    $user->phone = $request->phone;
-                }
+                // if ($request->phone) {
+                //     $user->phone = $request->phone;
+                // }
                 if ($request->email) {
                     $user->email = $request->email;
                 }
@@ -102,9 +102,7 @@ class StudentController extends Controller
                     $user->birthday
                         = Carbon::createFromFormat('d.m.Y', $request->birthday)->format('Y-m-d');
                 }
-                if ($request->birthday) {
-                    $user->birthday = $request->birthday;
-                }
+
 
                 $user->save();
 
@@ -330,6 +328,15 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
+
+    public function profile()
+    {
+        if (!Auth::check()) {
+            abort(403);
+        }
+        return view('students.profile', ['user' => User::find(Auth::user()->id), 'posts' => Post::where("user_id", Auth::user()->id)->get()]);
+    }
+
     public function show(string $id)
     {
         return view('students.show', ['user' => User::find($id), 'posts' => Post::where('delay', '<=', now())->where('draft', '==', 0)->where("user_id", $id)->get()]);
@@ -362,7 +369,7 @@ class StudentController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'birthday' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255', 'unique:' .  Rule::unique('users')->ignore($id)],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique('users')->ignore($id)],
+            'email' => ['required', 'string', 'lowercase',  'max:255', Rule::unique('users')->ignore($id)],
             'password' => ['required', Rules\Password::defaults()],
         ]);
         $user =  User::find($id);
@@ -374,12 +381,17 @@ class StudentController extends Controller
                 Storage::delete('public/images/' . $user->avatar);
             }
         } else {
-            $fileName = $user->avatar;
+            if ($request->delete_photo == 1) {
+                Storage::delete('public/images/' . $user->avatar);
+                $fileName = 'no-avatar.jpg';
+            } else {
+                $fileName = $user->avatar;
+            }
         }
         $user->avatar = $fileName;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
-        $user->phone = $request->phone;
+        // $user->phone = $request->phone;
         $user->email = $request->email;
         $user->login = $request->login;
         $user->password = $request->password;
@@ -388,7 +400,7 @@ class StudentController extends Controller
 
         $user->save();
 
-        return redirect()->route('students.index')->with('status', 'Student Updatet Successfully');
+        return redirect($request->url_previous)->with('status', 'Student Updatet Successfully');
     }
 
     /**

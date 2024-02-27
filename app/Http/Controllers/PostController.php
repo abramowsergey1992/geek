@@ -64,7 +64,7 @@ class PostController extends Controller
                         'description' => 'string|max:100',
                         'content' => 'string|max:1000',
                         'draft' => 'boolean',
-                        'delay' => ''
+                        'delay' => 'date|after_or_equal:now'
                     ]
                 );
 
@@ -134,15 +134,16 @@ class PostController extends Controller
                 $validate = Validator::make(
                     $request->all(),
                     [
-                        'title' => 'required|string|max:40',
+                        'title' => 'string',
                         'photo' => [
-                            'required', 'extensions:jpg,png',
+                            'nullable',
+                            'extensions:png',
                             File::image()->max(2 * 1024)
                         ],
-                        'description' => 'required|string|max:100',
-                        'content' => 'required|string|max:1000',
+                        'description' => 'nullable|string|max:100',
+                        'content' => 'nullable|string|max:1000',
                         'draft' => 'boolean',
-                        'delay' => 'required'
+                        'delay' => 'required|date|after_or_equal:now'
                     ]
                 );
 
@@ -171,7 +172,7 @@ class PostController extends Controller
                     'description' => $request->description,
                     'content' => $request->content,
                     'delay' => Carbon::createFromFormat('d.m.Y H:i', $request->delay)->format('Y-m-d H:i'),
-                    'draft'  => $draft,
+                    // 'draft'  => $draft,
                 ]);
 
                 return response()->json([
@@ -291,36 +292,42 @@ class PostController extends Controller
         if (!Gate::allows('is-auth')) {
             abort(403);
         }
-        $request->validate([
-            'title' => 'required|string|max:40',
-            'photo' => [
-                'required', 'extensions:jpg,png',
-                File::image()->max(2 * 1024)
+        $request->validate(
+            [
+                'title' => 'required|string',
+                'photo' =>  [
+                    'nullable',
+                    'extensions:png',
+                    File::image()->max(2 * 1024)
+                ],
+                'description' => 'nullable|string|max:100',
+                'content' => 'nullable|string|max:1000',
+                'draft' => 'boolean',
+
+                'delay' => 'required|date|after_or_equal:now'
             ],
-            'description' => 'required|string|max:100',
-            'content' => 'required|string|max:1000',
-            'draft' => 'boolean',
+            [
+                'delay.after_or_equal' => 'Ошибка!',
+            ]
+        );
 
-            'delay' => 'required'
-        ]);
-
-        $fileName = '';
+        $fileName = 'no-photo.jpg';
         if ($request->hasFile('photo')) {
             $fileName = time() . '.' . $request->photo->extension();
             $request->photo->storeAs('public/images', $fileName);
         }
-        Post::create([
+        $post = Post::create([
             'title' => $request->title,
             'user_id' => Auth::user()->id,
             'photo' =>   $fileName,
             'description' => $request->description,
             'content' => $request->content,
             'delay' => Carbon::createFromFormat('d.m.Y H:i', $request->delay)->format('Y-m-d H:i'),
-            'draft' => $request->draft,
+            // 'draft' => $request->draft,
         ]);
 
 
-        return redirect()->route('posts.index')->with('status', 'Post Created Successfully');
+        return redirect()->route('posts.show', $post->id)->with('status', 'Пост создан успешно');
     }
 
     /**
@@ -342,7 +349,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
 
-        if (!Gate::allows('post-crud', $post->user_id, $post->user_id)) {
+        if (!Auth::check()) {
             abort(403);
         }
         return view('posts.edit', compact('post'));
@@ -361,7 +368,7 @@ class PostController extends Controller
             'description' => 'required|string|max:100',
             'content' => 'required|string|max:1000',
             'draft' => 'boolean',
-            'delay' => 'required'
+            'delay' => 'required|date'
         ]);
 
         $fileName = '';
@@ -373,7 +380,13 @@ class PostController extends Controller
                 Storage::delete('public/images/' . $post->photo);
             }
         } else {
-            $fileName = $post->photo;
+            if ($request->delete_photo == 1) {
+                $fileName = $post->photo;
+                // $fileName = 'no-photo.jpg';
+                // Storage::delete('public/images/' . $post->photo);
+            } else {
+                $fileName = $post->photo;
+            }
         }
         $post->content = $request->content;
         $post->title = $request->title;
@@ -384,7 +397,7 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect()->route('posts.index')->with('status', 'Post Updated Successfully');
+        return redirect()->route('posts.show', $post->id)->with('status', 'Пост Обновлен Успешно');
     }
 
     /**
@@ -397,6 +410,6 @@ class PostController extends Controller
         }
         $post->delete();
 
-        return redirect()->route('posts.home')->with('status', 'Post Delete Successfully');
+        return redirect()->route('posts.profile')->with('status', 'Пост Удален Успешно');
     }
 }

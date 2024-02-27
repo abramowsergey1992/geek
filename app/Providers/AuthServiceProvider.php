@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
- use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\Models\Post;
-use App\Models\User;use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -23,38 +25,35 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('is-auth', function () {
-                return Auth::check();
-            
+            return Auth::check();
         });
         Gate::define('is-admin', function () {
-            if(Auth::check()){
+            if (Auth::check()) {
                 $user = User::where('id', Auth::user()->id)->first();
-                return $user->role=="administrator";
-            }else{
-                return false;
-            }
-                
-        });
-        Gate::define('post-crud', function ($usr ,$user_id) {
-           
-            if(Auth::check()){
-                
-                $user = User::where('id', Auth::user()->id)->first();
-                return $user->id == $user_id || $user->role=="administrator";
-            }else{
+                return $user->role == "administrator";
+            } else {
                 return false;
             }
         });
-        Gate::define('user-crud', function ($usr ,$user_id) {
-           
-            if(Auth::check()){
-                
+
+        Gate::define('post-crud', function ($usr, $user_id) {
+
+            if (Auth::check()) {
                 $user = User::where('id', Auth::user()->id)->first();
-                return $user->id == $user_id || $user->role=="administrator";
-            }else{
+                return Auth::user()->id == $user_id || $user->role == "administrator";
+            } else {
                 return false;
             }
         });
-  
+        Gate::define('user-crud', function ($usr, $user_id) {
+
+            if (Auth::check()) {
+
+                $user = User::where('id', Auth::user()->id)->first();
+                return $user->id == $user_id || $user->role == "administrator";
+            } else {
+                return false;
+            }
+        });
     }
 }
